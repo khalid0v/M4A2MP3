@@ -1,0 +1,89 @@
+<Window x:Class="M4A2MP3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="M4A to MP3 Converter"
+        Height="560" Width="880" MinHeight="420" MinWidth="680"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="49*"/>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="718*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- toolbar -->
+            <RowDefinition Height="Auto"/>
+            <!-- options -->
+            <RowDefinition Height="*"/>
+            <!-- file list -->
+            <RowDefinition Height="Auto"/>
+            <!-- progress -->
+            <RowDefinition Height="Auto"/>
+            <!-- status + convert -->
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,8" Grid.ColumnSpan="4">
+            <Button Content="Add Files..." Padding="12,4" Margin="0,0,6,0" Click="AddFiles_Click"/>
+            <Button Content="Add Folder..." Padding="12,4" Margin="0,0,6,0" Click="AddFolder_Click"/>
+            <Button Content="Remove Selected" Padding="12,4" Margin="0,0,6,0" Click="Remove_Click"/>
+            <Button Content="Clear" Padding="12,4" Click="Clear_Click"/>
+        </StackPanel>
+
+        <!-- Options -->
+        <Grid Grid.Row="1" Margin="0,0,0,8" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Output folder:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <TextBox x:Name="OutputFolderBox" Grid.Column="1" Padding="4,3"
+                     ToolTip="Leave empty to save each MP3 next to its source file"/>
+            <Button Grid.Column="2" Content="Browse..." Padding="10,3" Margin="6,0,0,0"
+                    Click="BrowseOutput_Click"/>
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="12,0,0,0">
+                <TextBlock Text="Bitrate:" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <ComboBox x:Name="BitrateBox" Width="90" SelectedIndex="3">
+                    <ComboBoxItem Content="128k"/>
+                    <ComboBoxItem Content="192k"/>
+                    <ComboBoxItem Content="256k"/>
+                    <ComboBoxItem Content="320k"/>
+                </ComboBox>
+            </StackPanel>
+
+            <CheckBox x:Name="RecursiveBox" Grid.Column="4" Content="Include subfolders"
+                      IsChecked="True" VerticalAlignment="Center" Margin="12,0,0,0"/>
+        </Grid>
+
+        <!-- File list -->
+        <ListView x:Name="FilesList" Grid.Row="2" SelectionMode="Extended" Grid.ColumnSpan="4">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="File" Width="260" DisplayMemberBinding="{Binding FileName}"/>
+                    <GridViewColumn Header="Folder" Width="320" DisplayMemberBinding="{Binding Folder}"/>
+                    <GridViewColumn Header="Status" Width="110" DisplayMemberBinding="{Binding Status}"/>
+                    <GridViewColumn Header="Details" Width="180" DisplayMemberBinding="{Binding Message}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Progress -->
+        <ProgressBar x:Name="Progress" Grid.Row="3" Height="18" Margin="0,8,0,0"
+                     Minimum="0" Value="0" Grid.ColumnSpan="4"/>
+
+        <!-- Status + Convert -->
+        <Grid Grid.Row="4" Margin="0,8,0,0" Grid.ColumnSpan="4">
+            <TextBlock x:Name="StatusText" VerticalAlignment="Center" Text="Add .m4a files to begin."/>
+            <Button x:Name="ConvertButton" Content="Convert" Padding="20,6" FontWeight="SemiBold"
+                    HorizontalAlignment="Right" Click="Convert_Click"/>
+        </Grid>
+    </Grid>
+</Window>

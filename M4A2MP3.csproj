@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>M4A2MP3</AssemblyName>
+    <RootNamespace>M4A2MP3</RootNamespace>
+    <ApplicationVersion>0.1.0</ApplicationVersion>
+  </PropertyGroup>
+
+</Project>
